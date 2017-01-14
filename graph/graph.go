@@ -18,18 +18,21 @@ type Graph struct {
 	nodes map[int]*Node
 }
 
-func (g *Graph) ShowGraph() {
+func (g *Graph) String() string {
+	var s string
 	for k, v := range g.nodes {
-		fmt.Printf("Node %d (id: %d, shortest distance: %d):\n", k, v.id, v.shortestDistance)
-		v.showEdges()
+		s = s + fmt.Sprintf("Node %d (id: %d, shortest distance: %d):\n", k, v.id, v.shortestDistance)
+		s = s + v.edgesToString()
 	}
+	return s
 }
 
-func (n *Node) showEdges() {
+func (n *Node) edgesToString() string {
+	var s string
 	for _, v := range n.edges {
-		fmt.Printf("\tHead ID: %d\tLength: %d\n", v.v, v.len)
+		s += fmt.Sprintf("\tHead ID: %d\tLength: %d\n", v.v, v.len)
 	}
-	fmt.Printf("\n")
+	return s + "\n"
 }
 
 func (g *Graph) ShowShortestDistance(id int) {
