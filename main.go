@@ -41,4 +41,5 @@ func main() {
 			n.AddEdge(v, len)
 		}
 	}
+	g.ShowGraph()
 }

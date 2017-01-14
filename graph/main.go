@@ -1,5 +1,7 @@
 package graph
 
+import "fmt"
+
 type Edge struct {
 	v, len int
 }
@@ -11,6 +13,20 @@ type Node struct {
 }
 type Graph struct {
 	nodes map[int]*Node
+}
+
+func (g *Graph) ShowGraph() {
+	for k, v := range g.nodes {
+		fmt.Printf("Node %d (id: %d):\n", k, v.id)
+		v.showEdges()
+	}
+}
+
+func (n *Node) showEdges() {
+	for _, v := range n.edges {
+		fmt.Printf("\tHead ID: %d\tLength: %d\n", v.v, v.len)
+	}
+	fmt.Printf("\n")
 }
 
 func New() *Graph {
