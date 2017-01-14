@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 	"strings"
@@ -41,5 +42,14 @@ func main() {
 			n.AddEdge(v, len)
 		}
 	}
-	g.ShowGraph()
+	sS := flag.Args()[1]
+	s, sErr := strconv.Atoi(sS)
+	if sErr != nil {
+		log.Fatal("The second argument must be the id of the node to compute shortest paths from")
+	}
+	g.ComputeShortestDistances(s)
+	for _, id := range os.Args[3:] {
+		idInt, _ := strconv.Atoi(id)
+		g.ShowShortestDistance(idInt)
+	}
 }
